@@ -1,0 +1,17 @@
+# Skills are managed in their own git repositories
+# Only track top-level convention/registry files
+*/
+
+# But do track top-level markdown files
+!*.md
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
