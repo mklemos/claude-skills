@@ -9,16 +9,45 @@ All custom Claude Code skills must be created in:
 
 Each skill should be in its own subdirectory:
 ```
-/Users/max/claude-skills/
+/Users/max/claude-skills/             # Parent git repo (PUBLIC)
+├── .git/                             # Tracks conventions/registry only
+├── .gitignore                        # Excludes all subdirectories (*/  )
+├── README.md                         # Skill registry
 ├── CONVENTIONS.md                    # This file
-├── skill-name-1/
+├── skill-name-1/                     # Independent git repo (PRIVATE)
+│   ├── .git/                         # Own git history
 │   ├── SKILL.md                      # Main skill instructions
 │   ├── README.md                     # Usage documentation
-│   ├── .gitignore                    # Git exclusions
-│   └── .git/                         # Git repository
-└── skill-name-2/
+│   └── .gitignore                    # Git exclusions
+└── skill-name-2/                     # Another independent git repo
     └── ...
 ```
+
+### Nested Repository Approach
+
+**Important**: This directory uses nested git repositories intentionally:
+
+- **Parent repo** (`/Users/max/claude-skills/.git`):
+  - Tracks: README.md, CONVENTIONS.md (registry/standards)
+  - Ignores: All subdirectories (`*/` in .gitignore)
+  - Purpose: Version control for conventions
+  - Visibility: PUBLIC (no personal data)
+
+- **Child repos** (e.g., `job-application-assistant/.git`):
+  - Completely independent repositories
+  - Own git history, own GitHub remote
+  - Purpose: Version control for individual skills
+  - Visibility: PRIVATE by default (contains personal data)
+
+**Why this works**:
+- Parent's `.gitignore` contains `*/` which excludes all subdirectories
+- Each skill repo is isolated and doesn't interfere with parent
+- Provides organized directory structure + separate version control
+- Conventions are public, skills are private
+
+**When working**:
+- `cd /Users/max/claude-skills && git status` → shows conventions only
+- `cd /Users/max/claude-skills/skill-name && git status` → shows skill only
 
 ## Version Control Requirements
 
